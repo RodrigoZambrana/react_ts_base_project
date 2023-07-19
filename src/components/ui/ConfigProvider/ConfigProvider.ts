@@ -17,7 +17,7 @@ export const defaultConfig = {
     themeColor: 'indigo',
     direction: 'ltr',
     mode: 'light',
-    locale: 'en',
+    locale: 'es',
     primaryColorLevel: 600,
     cardBordered: false,
     controlSize: SIZES.MD,

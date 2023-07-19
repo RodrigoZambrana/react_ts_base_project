@@ -234,7 +234,7 @@ const Profile = ({
                                     }}
                                 </Field>
                             </FormRow>
-                            <FormRow
+                            {/* <FormRow
                                 name="title"
                                 label="Title"
                                 {...validatorProps}
@@ -250,13 +250,13 @@ const Profile = ({
                                         <HiOutlineBriefcase className="text-xl" />
                                     }
                                 />
-                            </FormRow>
-                            <FormDesription
+                            </FormRow> */}
+                            {/* <FormDesription
                                 className="mt-8"
                                 title="Preferences"
                                 desc="Your personalized preference displayed in your account"
-                            />
-                            <FormRow
+                            /> */}
+                            {/* <FormRow
                                 name="lang"
                                 label="Language"
                                 {...validatorProps}
@@ -285,8 +285,8 @@ const Profile = ({
                                         />
                                     )}
                                 </Field>
-                            </FormRow>
-                            <FormRow
+                            </FormRow> */}
+                            {/* <FormRow
                                 name="timeZone"
                                 label="Time Zone"
                                 {...validatorProps}
@@ -302,15 +302,15 @@ const Profile = ({
                                         <HiOutlineGlobeAlt className="text-xl" />
                                     }
                                 />
-                            </FormRow>
-                            <FormRow
+                            </FormRow> */}
+                            {/* <FormRow
                                 name="syncData"
                                 label="Sync Data"
                                 {...validatorProps}
                                 border={false}
                             >
                                 <Field name="syncData" component={Switcher} />
-                            </FormRow>
+                            </FormRow> */}
                             <div className="mt-4 ltr:text-right">
                                 <Button
                                     className="ltr:mr-2 rtl:ml-2"

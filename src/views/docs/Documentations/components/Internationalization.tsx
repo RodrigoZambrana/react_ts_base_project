@@ -117,7 +117,7 @@ export const dateLocales: {
                 </p>
                 <SyntaxHighlighter language="ts">{`export const appConfig = {
     ...
-    locale: 'fr'
+    locale: 'es'
 }`}</SyntaxHighlighter>
             </div>
         </>

@@ -1,20 +1,20 @@
-import classNames from 'classnames'
+// import classNames from 'classnames'
 import Input from '@/components/ui/Input'
 import Button from '@/components/ui/Button'
-import Tag from '@/components/ui/Tag'
+// import Tag from '@/components/ui/Tag'
 import Notification from '@/components/ui/Notification'
 import toast from '@/components/ui/toast'
 import { FormContainer } from '@/components/ui/Form'
 import FormDesription from './FormDesription'
 import FormRow from './FormRow'
 import { Field, Form, Formik } from 'formik'
-import isLastChild from '@/utils/isLastChild'
-import {
-    HiOutlineDesktopComputer,
-    HiOutlineDeviceMobile,
-    HiOutlineDeviceTablet,
-} from 'react-icons/hi'
-import dayjs from 'dayjs'
+// import isLastChild from '@/utils/isLastChild'
+// import {
+//     HiOutlineDesktopComputer,
+//     HiOutlineDeviceMobile,
+//     HiOutlineDeviceTablet,
+// } from 'react-icons/hi'
+// import dayjs from 'dayjs'
 import * as Yup from 'yup'
 
 type LoginHistory = {
@@ -30,18 +30,18 @@ type PasswordFormModel = {
     confirmNewPassword: string
 }
 
-const LoginHistoryIcon = ({ type }: { type: string }) => {
-    switch (type) {
-        case 'Desktop':
-            return <HiOutlineDesktopComputer />
-        case 'Mobile':
-            return <HiOutlineDeviceMobile />
-        case 'Tablet':
-            return <HiOutlineDeviceTablet />
-        default:
-            return <HiOutlineDesktopComputer />
-    }
-}
+// const LoginHistoryIcon = ({ type }: { type: string }) => {
+//     switch (type) {
+//         case 'Desktop':
+//             return <HiOutlineDesktopComputer />
+//         case 'Mobile':
+//             return <HiOutlineDeviceMobile />
+//         case 'Tablet':
+//             return <HiOutlineDeviceTablet />
+//         default:
+//             return <HiOutlineDesktopComputer />
+//     }
+// }
 
 const validationSchema = Yup.object().shape({
     password: Yup.string().required('Password Required'),
@@ -154,7 +154,7 @@ const Password = ({ data }: { data?: LoginHistory[] }) => {
                     )
                 }}
             </Formik>
-            <div className="mt-6">
+            {/* <div className="mt-6">
                 <FormDesription
                     title="Where you're signed in"
                     desc="You're signed in to your account on these devices."
@@ -200,7 +200,7 @@ const Password = ({ data }: { data?: LoginHistory[] }) => {
                         ))}
                     </div>
                 )}
-            </div>
+            </div> */}
         </>
     )
 }

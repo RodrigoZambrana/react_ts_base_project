@@ -12,7 +12,7 @@ const appConfig: AppConfig = {
     authenticatedEntryPath: '/app/project/project-list',
     unAuthenticatedEntryPath: '/sign-in',
     tourPath: '/app/account/kyc-form',
-    locale: 'en',
+    locale: 'es',
     enableMock: true,
 }
 

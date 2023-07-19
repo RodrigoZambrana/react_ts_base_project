@@ -57,9 +57,9 @@ const settingsMenu: Record<
 > = {
     profile: { label: 'Profile', path: 'profile' },
     password: { label: 'Password', path: 'password' },
-    notification: { label: 'Notification', path: 'notification' },
-    integration: { label: 'Integration', path: 'integration' },
-    billing: { label: 'Billing', path: 'billing' },
+    // notification: { label: 'Notification', path: 'notification' },
+    // integration: { label: 'Integration', path: 'integration' },
+    // billing: { label: 'Billing', path: 'billing' },
 }
 
 const Settings = () => {
@@ -112,11 +112,11 @@ const Settings = () => {
                         {currentTab === 'password' && (
                             <Password data={data.loginHistory} />
                         )}
-                        {currentTab === 'notification' && (
+                        {/* {currentTab === 'notification' && (
                             <NotificationSetting data={data.notification} />
                         )}
                         {currentTab === 'integration' && <Integration />}
-                        {currentTab === 'billing' && <Billing />}
+                        {currentTab === 'billing' && <Billing />} */}
                     </Suspense>
                 </div>
             </AdaptableCard>

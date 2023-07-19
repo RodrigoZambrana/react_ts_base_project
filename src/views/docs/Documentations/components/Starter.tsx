@@ -41,7 +41,7 @@ const RouteAndNav = () => {
     authenticatedEntryPath: '/app/sales/dashboard',
     unAuthenticatedEntryPath: '/sign-in',
     tourPath: '/app/account/kyc-form',
-    locale: 'en',
+    locale: 'es',
     enableMock: true,
 }
 `}</SyntaxHighlighter>

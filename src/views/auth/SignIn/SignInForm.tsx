@@ -68,7 +68,7 @@ const SignInForm = (props: SignInFormProps) => {
                 initialValues={{
                     userName: 'admin',
                     password: '123Qwe',
-                    rememberMe: true,
+                    rememberMe: false,
                 }}
                 validationSchema={validationSchema}
                 onSubmit={(values, { setSubmitting }) => {
@@ -119,11 +119,11 @@ const SignInForm = (props: SignInFormProps) => {
                                     name="rememberMe"
                                     component={Checkbox}
                                 >
-                                    Remember Me
+                                    Recordar datos
                                 </Field>
-                                <ActionLink to={forgotPasswordUrl}>
+                                {/* <ActionLink to={forgotPasswordUrl}>
                                     Forgot Password?
-                                </ActionLink>
+                                </ActionLink> */}
                             </div>
                             <Button
                                 block
@@ -133,10 +133,10 @@ const SignInForm = (props: SignInFormProps) => {
                             >
                                 {isSubmitting ? 'Signing in...' : 'Sign In'}
                             </Button>
-                            <div className="mt-4 text-center">
+                            {/* <div className="mt-4 text-center">
                                 <span>{`Don't have an account yet?`} </span>
                                 <ActionLink to={signUpUrl}>Sign up</ActionLink>
-                            </div>
+                            </div> */}
                         </FormContainer>
                     </Form>
                 )}

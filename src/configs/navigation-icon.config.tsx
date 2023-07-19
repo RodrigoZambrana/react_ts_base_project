@@ -1,3 +1,4 @@
+import { HiOutlineCog } from 'react-icons/hi';
 import {
     HiOutlineChartSquareBar,
     HiOutlineUserGroup,
@@ -55,6 +56,8 @@ const navigationIcon: NavigationIcons = {
     sharedComponentDoc: <HiOutlineShare />,
     utilsDoc: <HiOutlineVariable />,
     changeLog: <HiOutlineCode />,
+    settings: <HiOutlineCog/>,
+    
 }
 
 export default navigationIcon

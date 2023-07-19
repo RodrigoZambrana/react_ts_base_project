@@ -10,8 +10,8 @@ export const publicRoutes: Routes = [...authRoute]
 
 export const protectedRoutes: Routes = [
     ...appsRoute,
-    ...uiComponentsRoute,
-    ...pagesRoute,
-    ...authDemoRoute,
-    ...docsRoute,
+    // ...uiComponentsRoute,
+    // ...pagesRoute,
+    // ...authDemoRoute,
+    // ...docsRoute,
 ]

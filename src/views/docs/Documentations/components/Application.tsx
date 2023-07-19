@@ -67,7 +67,7 @@ const Application = () => {
     authenticatedEntryPath: '/app/sales/dashboard',
     unAuthenticatedEntryPath: '/sign-in',
     tourPath: '/app/account/kyc-form',
-    locale: 'en',
+    locale: 'es',
     enableMock: true
 }`}</SyntaxHighlighter>
             <span>
@@ -78,7 +78,7 @@ const Application = () => {
     authenticatedEntryPath: '/home',
     unAuthenticatedEntryPath: '/sign-in',
     tourPath: '/',
-    locale: 'en',
+    locale: 'es',
     enableMock: true
 }`}</SyntaxHighlighter>
             <h5 className="-mb-2 mt-6">Metadata</h5>

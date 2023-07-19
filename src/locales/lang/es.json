@@ -131,6 +131,13 @@
             "sharedComponentDoc": "Componente compartido",
             "utilsDoc": "útiles",
             "changeLog": "Registro de cambios"
+        },
+
+        "appNew": {
+            "config": "Configuraciones",
+            "dashboard": "Tablero",
+            "params": "Parámetros",
+            "newParam": "Agregar Parámetro"
         }
     }
 }
