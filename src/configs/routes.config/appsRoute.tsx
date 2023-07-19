@@ -12,8 +12,8 @@ const appsRoute: Routes = [
     },
     {
         key: 'appsProject.projectList',
-        path: `${APP_PREFIX_PATH}/project/project-list`,
-        component: lazy(() => import('@/views/project/ProjectList')),
+        path: `${APP_PREFIX_PATH}/empresas/list`,
+        component: lazy(() => import('@/views/empresas/empresas-list')),
         authority: [ADMIN, USER],
     },
     {
@@ -25,10 +25,19 @@ const appsRoute: Routes = [
             pageContainerType: 'gutterless',
         },
     },
+    // {
+    //     key: 'appsProject.scrumBoard',
+    //     path: `${APP_PREFIX_PATH}/empresa`,
+    //     component: lazy(() => import('@/views/EmpresaPage')),
+    //     authority: [ADMIN, USER],
+    //     meta: {
+    //         pageContainerType: 'gutterless',
+    //     },
+    // },
     {
         key: 'appsProject.issue',
         path: `${APP_PREFIX_PATH}/project/issue`,
-        component: lazy(() => import('@/views/project/Issue')),
+        component: lazy(() => import('@/views/project/issue')),
         authority: [ADMIN, USER],
     },
     {
@@ -198,6 +207,16 @@ const appsRoute: Routes = [
         key: 'appsAccount.settings',
         path: `${APP_PREFIX_PATH}/account/settings/:tab`,
         component: lazy(() => import('@/views/account/Settings')),
+        authority: [ADMIN, USER],
+        meta: {
+            header: 'Settings',
+            headerContainer: true,
+        },
+    },
+    {
+        key: 'appsAccount.settings',
+        path: `${APP_PREFIX_PATH}/empresa/info/:tab`,
+        component: lazy(() => import('@/views/empresas/empresa-detail')),
         authority: [ADMIN, USER],
         meta: {
             header: 'Settings',
