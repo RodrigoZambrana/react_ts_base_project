@@ -215,8 +215,8 @@ const appsRoute: Routes = [
     },
     {
         key: 'appsAccount.settings',
-        path: `${APP_PREFIX_PATH}/empresa/info/:tab`,
-        component: lazy(() => import('@/views/empresas/empresa-detail')),
+        path: `${APP_PREFIX_PATH}/empresa/:tab`,
+        component: lazy(() => import('@/views/empresas/Empresa-info')),
         authority: [ADMIN, USER],
         meta: {
             header: 'Settings',

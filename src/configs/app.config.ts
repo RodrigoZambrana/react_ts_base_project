@@ -9,11 +9,11 @@ export type AppConfig = {
 
 const appConfig: AppConfig = {
     apiPrefix: '/api',
-    authenticatedEntryPath: '/app/project/project-list',
+    authenticatedEntryPath: '/app/empresas/list',
     unAuthenticatedEntryPath: '/sign-in',
     tourPath: '/app/account/kyc-form',
     locale: 'es',
-    enableMock: true,
+    enableMock: false,
 }
 
 export default appConfig

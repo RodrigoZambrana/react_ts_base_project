@@ -21,5 +21,8 @@ export default defineConfig({
   },
   build: {
     outDir: 'build'
+  },
+  define: {
+    'import.meta.env.ENV_VARIABLE': JSON.stringify(process.env.VITE_API_BASE_URL)
   }
 });

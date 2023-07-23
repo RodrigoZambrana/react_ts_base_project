@@ -1,4 +1,4 @@
-```jsx
+<!-- ```jsx
 import DoubleSidedImage from '@/components/shared/DoubleSidedImage'
 
 const Example = () => {
@@ -12,4 +12,4 @@ const Example = () => {
 }
 
 export default Example
-```
+``` -->

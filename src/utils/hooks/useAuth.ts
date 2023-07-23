@@ -37,14 +37,15 @@ function useAuth() {
             if (resp.data) {
                 const { token } = resp.data
                 dispatch(signInSuccess(token))
-                if (resp.data.user) {
+                if (resp.data) {
                     dispatch(
                         setUser(
-                            resp.data.user || {
+                            resp.data || {
                                 avatar: '',
-                                userName: 'Anonymous',
-                                authority: ['USER'],
+                                firstName: 'Anonymous',
+                                lastName: 'Anonymous',
                                 email: '',
+                                userType: ['USER'],
                             }
                         )
                     )
@@ -73,14 +74,15 @@ function useAuth() {
             if (resp.data) {
                 const { token } = resp.data
                 dispatch(signInSuccess(token))
-                if (resp.data.user) {
+                if (resp.data) {
                     dispatch(
                         setUser(
-                            resp.data.user || {
+                            resp.data || {
                                 avatar: '',
-                                userName: 'Anonymous',
-                                authority: ['USER'],
+                                firstName: 'Anonymous',
+                                lastName: 'Anonymous',
                                 email: '',
+                                userType: ['USER'],
                             }
                         )
                     )
@@ -108,16 +110,14 @@ function useAuth() {
         dispatch(
             setUser({
                 avatar: '',
-                userName: '',
                 email: '',
-                authority: [],
             })
         )
         navigate(appConfig.unAuthenticatedEntryPath)
     }
 
     const signOut = async () => {
-        await apiSignOut()
+       // await apiSignOut()
         handleSignOut()
     }
 
