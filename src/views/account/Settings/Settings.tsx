@@ -9,12 +9,9 @@ import { apiGetAccountSettingData } from '@/services/AccountServices'
 type AccountSetting = {
     profile: {
         name: string
+        lastName: string
         email: string
-        title: string
         avatar: string
-        timeZone: string
-        lang: string
-        syncData: boolean
     }
     loginHistory: {
         type: string
@@ -55,8 +52,8 @@ const settingsMenu: Record<
         path: string
     }
 > = {
-    profile: { label: 'Profile', path: 'profile' },
-    password: { label: 'Password', path: 'password' },
+    profile: { label: 'Perfil', path: 'profile' },
+    password: { label: 'Contraseña', path: 'password' },
     // notification: { label: 'Notification', path: 'notification' },
     // integration: { label: 'Integration', path: 'integration' },
     // billing: { label: 'Billing', path: 'billing' },
@@ -110,7 +107,7 @@ const Settings = () => {
                             <Profile data={data.profile} />
                         )}
                         {currentTab === 'password' && (
-                            <Password data={data.loginHistory} />
+                            <Password/>
                         )}
                         {/* {currentTab === 'notification' && (
                             <NotificationSetting data={data.notification} />

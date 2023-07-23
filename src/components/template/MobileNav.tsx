@@ -48,7 +48,7 @@ const MobileNav = () => {
     const sideNavCollapse = useAppSelector(
         (state) => state.theme.layout.sideNavCollapse
     )
-    const userAuthority = useAppSelector((state) => state.auth.user.authority)
+    const userAuthority = useAppSelector((state) => state.auth.user.userType)
 
     const { smaller } = useResponsive()
 
@@ -72,7 +72,7 @@ const MobileNav = () => {
                         <MobileNavToggle toggled={isOpen} />
                     </div>
                     <Drawer
-                        title="Navigation"
+                        title="Menu"
                         isOpen={isOpen}
                         bodyClass={classNames(navColor(), 'p-0')}
                         width={330}

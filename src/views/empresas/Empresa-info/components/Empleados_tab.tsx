@@ -76,11 +76,13 @@ const Password = ({ data }: { data?: LoginHistory[] }) => {
                     confirmNewPassword: '',
                 }}
                 validationSchema={validationSchema}
-                onSubmit={(values, { setSubmitting }) => {
+                onSubmit={(values, { setSubmitting, resetForm }) => {
                     setSubmitting(true)
                     setTimeout(() => {
                         onFormSubmit(values, setSubmitting)
                     }, 1000)
+                    resetForm({})
+
                 }}
             >
                 {({ touched, errors, isSubmitting, resetForm }) => {

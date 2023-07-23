@@ -335,7 +335,7 @@ const appsNavigationConfig: NavigationTree[] = [
                     {
                         key: 'appsAccount.settings',
                         path: `${APP_PREFIX_PATH}/account/settings/profile`,
-                        title: 'Settings',
+                        title: 'Perfil',
                         translateKey: 'nav.appsAccount.settings',
                         icon: '',
                         type: NAV_ITEM_TYPE_ITEM,

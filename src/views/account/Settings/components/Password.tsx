@@ -8,21 +8,8 @@ import { FormContainer } from '@/components/ui/Form'
 import FormDesription from './FormDesription'
 import FormRow from './FormRow'
 import { Field, Form, Formik } from 'formik'
-// import isLastChild from '@/utils/isLastChild'
-// import {
-//     HiOutlineDesktopComputer,
-//     HiOutlineDeviceMobile,
-//     HiOutlineDeviceTablet,
-// } from 'react-icons/hi'
-// import dayjs from 'dayjs'
 import * as Yup from 'yup'
 
-type LoginHistory = {
-    type: string
-    deviceName: string
-    time: number
-    location: string
-}
 
 type PasswordFormModel = {
     password: string
@@ -30,37 +17,25 @@ type PasswordFormModel = {
     confirmNewPassword: string
 }
 
-// const LoginHistoryIcon = ({ type }: { type: string }) => {
-//     switch (type) {
-//         case 'Desktop':
-//             return <HiOutlineDesktopComputer />
-//         case 'Mobile':
-//             return <HiOutlineDeviceMobile />
-//         case 'Tablet':
-//             return <HiOutlineDeviceTablet />
-//         default:
-//             return <HiOutlineDesktopComputer />
-//     }
-// }
 
 const validationSchema = Yup.object().shape({
-    password: Yup.string().required('Password Required'),
+    password: Yup.string().required('Ingrese contraseña anterior'),
     newPassword: Yup.string()
-        .required('Enter your new password')
-        .min(8, 'Too Short!')
+        .required('Ingrese nueva contraseña ')
+        .min(6, 'Mínimo 6 caracteres!')
         .matches(/^[A-Za-z0-9_-]*$/, 'Only Letters & Numbers Allowed'),
     confirmNewPassword: Yup.string().oneOf(
         [Yup.ref('newPassword'), ''],
-        'Password not match'
+        'Contraseña y repetir contraseña no coinciden'
     ),
 })
 
-const Password = ({ data }: { data?: LoginHistory[] }) => {
+const Password = () => {
     const onFormSubmit = (
         values: PasswordFormModel,
         setSubmitting: (isSubmitting: boolean) => void
     ) => {
-        toast.push(<Notification title={'Password updated'} type="success" />, {
+        toast.push(<Notification title={'Contraseña Actualizada'} type="success" />, {
             placement: 'top-center',
         })
         setSubmitting(false)
@@ -76,11 +51,12 @@ const Password = ({ data }: { data?: LoginHistory[] }) => {
                     confirmNewPassword: '',
                 }}
                 validationSchema={validationSchema}
-                onSubmit={(values, { setSubmitting }) => {
+                onSubmit={(values, { setSubmitting, resetForm }) => {
                     setSubmitting(true)
                     setTimeout(() => {
                         onFormSubmit(values, setSubmitting)
                     }, 1000)
+                    resetForm({})
                 }}
             >
                 {({ touched, errors, isSubmitting, resetForm }) => {
@@ -89,45 +65,45 @@ const Password = ({ data }: { data?: LoginHistory[] }) => {
                         <Form>
                             <FormContainer>
                                 <FormDesription
-                                    title="Password"
-                                    desc="Enter your current & new password to reset your password"
+                                    title="Contraseña"
+                                    desc="Ingrese la contraseña actual y la nueva contraseña para cambiarla"
                                 />
                                 <FormRow
                                     name="password"
-                                    label="Current Password"
+                                    label="Contraseña actual"
                                     {...validatorProps}
                                 >
                                     <Field
                                         type="password"
                                         autoComplete="off"
                                         name="password"
-                                        placeholder="Current Password"
+                                        placeholder="Contraseña actual"
                                         component={Input}
                                     />
                                 </FormRow>
                                 <FormRow
                                     name="newPassword"
-                                    label="New Password"
+                                    label="Nueva contraseña"
                                     {...validatorProps}
                                 >
                                     <Field
                                         type="password"
                                         autoComplete="off"
                                         name="newPassword"
-                                        placeholder="New Password"
+                                        placeholder="Nueva contraseña"
                                         component={Input}
                                     />
                                 </FormRow>
                                 <FormRow
                                     name="confirmNewPassword"
-                                    label="Confirm Password"
+                                    label="Confirmar contraseña"
                                     {...validatorProps}
                                 >
                                     <Field
                                         type="password"
                                         autoComplete="off"
                                         name="confirmNewPassword"
-                                        placeholder="Confirm Password"
+                                        placeholder="Confirmar contraseña"
                                         component={Input}
                                     />
                                 </FormRow>
@@ -137,7 +113,7 @@ const Password = ({ data }: { data?: LoginHistory[] }) => {
                                         type="button"
                                         onClick={() => resetForm()}
                                     >
-                                        Reset
+                                        Restablecer
                                     </Button>
                                     <Button
                                         variant="solid"
@@ -145,8 +121,8 @@ const Password = ({ data }: { data?: LoginHistory[] }) => {
                                         type="submit"
                                     >
                                         {isSubmitting
-                                            ? 'Updating'
-                                            : 'Update Password'}
+                                            ? 'Actualizando'
+                                            : 'Actualizar'}
                                     </Button>
                                 </div>
                             </FormContainer>
@@ -154,53 +130,6 @@ const Password = ({ data }: { data?: LoginHistory[] }) => {
                     )
                 }}
             </Formik>
-            {/* <div className="mt-6">
-                <FormDesription
-                    title="Where you're signed in"
-                    desc="You're signed in to your account on these devices."
-                />
-                {data && (
-                    <div className="rounded-lg border border-gray-200 dark:border-gray-600 mt-6">
-                        {data.map((log, index) => (
-                            <div
-                                key={log.deviceName}
-                                className={classNames(
-                                    'flex items-center px-4 py-6',
-                                    !isLastChild(data, index) &&
-                                        'border-b border-gray-200 dark:border-gray-600'
-                                )}
-                            >
-                                <div className="flex items-center">
-                                    <div className="text-3xl">
-                                        <LoginHistoryIcon type={log.type} />
-                                    </div>
-                                    <div className="ml-3 rtl:mr-3">
-                                        <div className="flex items-center">
-                                            <div className="text-gray-900 dark:text-gray-100 font-semibold">
-                                                {log.deviceName}
-                                            </div>
-                                            {index === 0 && (
-                                                <Tag className="bg-emerald-100 text-emerald-600 dark:bg-emerald-500/20 dark:text-emerald-100 rounded-md border-0 mx-2">
-                                                    <span className="capitalize">
-                                                        {' '}
-                                                        Current{' '}
-                                                    </span>
-                                                </Tag>
-                                            )}
-                                        </div>
-                                        <span>
-                                            {log.location} •{' '}
-                                            {dayjs
-                                                .unix(log.time)
-                                                .format('DD-MMM-YYYY, hh:mm A')}
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
-                        ))}
-                    </div>
-                )}
-            </div> */}
         </>
     )
 }

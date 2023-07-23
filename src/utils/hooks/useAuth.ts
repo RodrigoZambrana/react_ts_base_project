@@ -5,6 +5,7 @@ import {
     signOutSuccess,
     useAppSelector,
     useAppDispatch,
+    
 } from '@/store'
 import appConfig from '@/configs/app.config'
 import { REDIRECT_URL_KEY } from '@/constants/app.constant'
@@ -41,6 +42,7 @@ function useAuth() {
                     dispatch(
                         setUser(
                             resp.data || {
+                                id: 0,
                                 avatar: '',
                                 firstName: 'Anonymous',
                                 lastName: 'Anonymous',
@@ -78,6 +80,7 @@ function useAuth() {
                     dispatch(
                         setUser(
                             resp.data || {
+                                id: 0,
                                 avatar: '',
                                 firstName: 'Anonymous',
                                 lastName: 'Anonymous',
@@ -109,15 +112,16 @@ function useAuth() {
         dispatch(signOutSuccess())
         dispatch(
             setUser({
+                id:0,
                 avatar: '',
                 email: '',
             })
         )
         navigate(appConfig.unAuthenticatedEntryPath)
     }
+    
 
     const signOut = async () => {
-       // await apiSignOut()
         handleSignOut()
     }
 

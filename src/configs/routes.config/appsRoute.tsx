@@ -209,7 +209,7 @@ const appsRoute: Routes = [
         component: lazy(() => import('@/views/account/Settings')),
         authority: [ADMIN, USER],
         meta: {
-            header: 'Settings',
+            header: 'Perfil',
             headerContainer: true,
         },
     },
@@ -219,7 +219,7 @@ const appsRoute: Routes = [
         component: lazy(() => import('@/views/empresas/Empresa-info')),
         authority: [ADMIN, USER],
         meta: {
-            header: 'Settings',
+            header: 'Perfil',
             headerContainer: true,
         },
     },

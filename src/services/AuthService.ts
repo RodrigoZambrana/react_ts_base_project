@@ -12,7 +12,7 @@ import type {
 
 export async function apiSignIn(data: SignInCredential) {
     return ApiService.fetchData<SignInResponse>({
-        url: '/admin/login',
+        url: '/login',
         method: 'post',
         data,
     })
