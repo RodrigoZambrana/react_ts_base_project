@@ -23,13 +23,16 @@ import useAuth from '@/utils/hooks/useAuth'
 import updateProfile from '@/utils/hooks/useUser'
 import useTimeOutMessage from '@/utils/hooks/useTimeOutMessage'
 import useUser from '@/utils/hooks/useUser'
+import { useState } from 'react'
 
 export type ProfileFormModel = {
     id?: number
     name?: string
     lastName?: string
     email?: string
-    avatar?: string
+    profilePicture?: string,
+    avatar?:  string
+    foto?:  File
 }
 
 type ProfileProps = {
@@ -55,15 +58,16 @@ const Profile = (
         name: useAppSelector((state) => state.auth.user.firstName),
         lastName: useAppSelector((state) => state.auth.user.lastName),
         email: useAppSelector((state) => state.auth.user.email),
-        avatar:useAppSelector((state) => state.auth.user.avatar)
+        avatar:useAppSelector((state) => state.auth.user.profilePicture)
     },
 }: ProfileProps) => {
     const onSetFormFile = (
         form: FormikProps<ProfileFormModel>,
         field: FieldInputProps<ProfileFormModel>,
-        file: File[]
+        files: File[]
     ) => {
-        form.setFieldValue(field.name, URL.createObjectURL(file[0]))
+        form.setFieldValue(field.name, URL.createObjectURL(files[0]))
+        form.setFieldValue('foto', files[0])
     }
     
     const [message, setMessage] = useTimeOutMessage()
@@ -74,16 +78,12 @@ const Profile = (
         setSubmitting: (isSubmitting: boolean) => void,
     ) => {
         console.log('values', values)
-        const {id, name, lastName, email } = values
+        const {id, name, lastName, email, foto } = values
         setSubmitting(true)
-        const result = await updateProfile({ id, firstName:name, lastName, email  })
+        const result = await updateProfile({ id, firstName:name, lastName, email, foto  })
         if (result?.status === 'failed') {
             setMessage(result.message)
         }
-
-
-
-
         toast.push(<Notification title={'Perfil Actualizado'} type="success" />, {
             placement: 'top-center',
         })
@@ -102,7 +102,7 @@ const Profile = (
                 }, 1000)
             }}
         >
-            {({ values, touched, errors, isSubmitting, resetForm }) => {
+            {({ touched, errors, isSubmitting, resetForm }) => {
                 const validatorProps = { touched, errors }
                 return (
                     <Form>

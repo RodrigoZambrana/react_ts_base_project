@@ -1,3 +1,4 @@
+import profilePicture from '../../../backend_base_project/src/middlewares/MulterPictureHandler';
 export type SignInCredential = {
     email: string
     password: string
@@ -10,6 +11,7 @@ export type SignInResponse = {
     lastName: string,
     contactNumber:string,
     email: string,
+    profilePicture: string,
     userType:string[],   
 }
 

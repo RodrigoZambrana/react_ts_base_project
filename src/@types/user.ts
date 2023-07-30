@@ -4,5 +4,6 @@ export type updateProfile = {
     firstName?: string,
     lastName?: string,
     email?: string,
+    foto?: File
 }
 
