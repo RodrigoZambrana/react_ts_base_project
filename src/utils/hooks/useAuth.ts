@@ -5,7 +5,6 @@ import {
     signOutSuccess,
     useAppSelector,
     useAppDispatch,
-    
 } from '@/store'
 import appConfig from '@/configs/app.config'
 import { REDIRECT_URL_KEY } from '@/constants/app.constant'
@@ -70,7 +69,15 @@ function useAuth() {
         }
     }
 
-    const signUp = async (values: SignUpCredential) => {
+    const signUp = async (
+        values: SignUpCredential
+    ): Promise<
+        | {
+              status: Status
+              message: string
+          }
+        | undefined
+    > => {
         try {
             const resp = await apiSignUp(values)
             if (resp.data) {
@@ -112,14 +119,17 @@ function useAuth() {
         dispatch(signOutSuccess())
         dispatch(
             setUser({
-                id:0,
+                id: 0,
                 avatar: '',
                 email: '',
+                firstName: '',
+                lastName: '',
+                profilePicture: '',
+                userType: [],
             })
         )
         navigate(appConfig.unAuthenticatedEntryPath)
     }
-    
 
     const signOut = async () => {
         handleSignOut()

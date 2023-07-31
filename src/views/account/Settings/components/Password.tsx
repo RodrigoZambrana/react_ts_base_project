@@ -4,22 +4,28 @@ import Button from '@/components/ui/Button'
 // import Tag from '@/components/ui/Tag'
 import Notification from '@/components/ui/Notification'
 import toast from '@/components/ui/toast'
+import { apiResetPassword } from '@/services/AuthService'
 import { FormContainer } from '@/components/ui/Form'
 import FormDesription from './FormDesription'
 import FormRow from './FormRow'
 import { Field, Form, Formik } from 'formik'
 import * as Yup from 'yup'
-
+import { useState } from 'react'
+import { AxiosError } from 'axios'
+import useTimeOutMessage from '@/utils/hooks/useTimeOutMessage'
+import { useAppSelector } from '@/store'
+import { resetPassword } from '../../../../../../backend_base_project/src/controller/userController'
+import useUser from '@/utils/hooks/useUser'
+import { Alert } from '@/components/ui'
 
 type PasswordFormModel = {
-    password: string
+    // password: string
     newPassword: string
     confirmNewPassword: string
 }
 
-
 const validationSchema = Yup.object().shape({
-    password: Yup.string().required('Ingrese contraseña anterior'),
+    // password: Yup.string().required('Ingrese contraseña anterior'),
     newPassword: Yup.string()
         .required('Ingrese nueva contraseña ')
         .min(6, 'Mínimo 6 caracteres!')
@@ -31,22 +37,53 @@ const validationSchema = Yup.object().shape({
 })
 
 const Password = () => {
-    const onFormSubmit = (
+    const [resetComplete, setResetComplete] = useState(false)
+    const [message, setMessage] = useTimeOutMessage()
+    var id = useAppSelector((state) => state.auth.user.id)
+
+    const { resetPassword } = useUser()
+    const onFormSubmit = async (
         values: PasswordFormModel,
         setSubmitting: (isSubmitting: boolean) => void
     ) => {
-        toast.push(<Notification title={'Contraseña Actualizada'} type="success" />, {
-            placement: 'top-center',
-        })
-        setSubmitting(false)
         console.log('values', values)
+        const { newPassword } = values
+        setSubmitting(true)
+        const result = await resetPassword({
+            newPassword,
+            id,
+        })
+        console.log('result', result?.status)
+        if (result?.status !== '200') {
+            toast.push(
+                <Notification
+                    title={
+                        'Error Code:' +
+                        result?.status +
+                        ' Error message:' +
+                        result?.message
+                    }
+                    type="danger"
+                />,
+                {
+                    placement: 'top-center',
+                }
+            )
+        } else
+            toast.push(
+                <Notification title={'Perfil Actualizado'} type="success" />,
+                {
+                    placement: 'top-center',
+                }
+            )
+        setSubmitting(false)
     }
 
     return (
         <>
             <Formik
                 initialValues={{
-                    password: '',
+                    // password: '',
                     newPassword: '',
                     confirmNewPassword: '',
                 }}
@@ -66,9 +103,9 @@ const Password = () => {
                             <FormContainer>
                                 <FormDesription
                                     title="Contraseña"
-                                    desc="Ingrese la contraseña actual y la nueva contraseña para cambiarla"
+                                    desc="Cambio de contraseña"
                                 />
-                                <FormRow
+                                {/* <FormRow
                                     name="password"
                                     label="Contraseña actual"
                                     {...validatorProps}
@@ -80,7 +117,7 @@ const Password = () => {
                                         placeholder="Contraseña actual"
                                         component={Input}
                                     />
-                                </FormRow>
+                                </FormRow> */}
                                 <FormRow
                                     name="newPassword"
                                     label="Nueva contraseña"

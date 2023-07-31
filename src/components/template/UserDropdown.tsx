@@ -8,6 +8,7 @@ import classNames from 'classnames'
 import { HiOutlineUser, HiOutlineCog, HiOutlineLogout } from 'react-icons/hi'
 import { FiActivity } from 'react-icons/fi'
 import type { CommonProps } from '@/@types/common'
+import acronym from '@/utils/acronym'
 
 type DropdownList = {
     label: string
@@ -34,20 +35,25 @@ const dropdownItemList: DropdownList[] = [
 ]
 
 const _UserDropdown = ({ className }: CommonProps) => {
-    const { avatar, firstName, lastName,userType, email } = useAppSelector(
-        (state) => state.auth.user
-    )
+    const { profilePicture, firstName, lastName, userType, email } =
+        useAppSelector((state) => state.auth.user)
 
     const { signOut } = useAuth()
-
+    const avatarProps = profilePicture !== '' ? { src: profilePicture } : {}
     const UserAvatar = (
         <div className={classNames(className, 'flex items-center gap-2')}>
-            <Avatar size={32} shape="circle" src={avatar} />
+            <Avatar
+                size={32}
+                shape="circle"
+                // icon={<HiOutlineUser />}
+                {...avatarProps}
+            >
+                {acronym(firstName)}
+            </Avatar>
+
             <div className="hidden md:block">
-                <div className="font-bold">{firstName+' '+lastName}</div>
-                <div className="text-xs capitalize">
-                    {userType || 'guest'}
-                </div>
+                <div className="font-bold">{firstName + ' ' + lastName}</div>
+                <div className="text-xs capitalize">{userType || 'guest'}</div>
             </div>
         </div>
     )
@@ -61,7 +67,11 @@ const _UserDropdown = ({ className }: CommonProps) => {
             >
                 <Dropdown.Item variant="header">
                     <div className="py-2 px-3 flex items-center gap-2">
-                        <Avatar shape="circle" src={avatar} />
+                        <Avatar
+                            shape="circle"
+                            icon={<HiOutlineUser />}
+                            {...avatarProps}
+                        />
                         <div>
                             <div className="font-bold text-gray-900 dark:text-gray-100">
                                 {firstName + ' ' + lastName}
@@ -77,8 +87,8 @@ const _UserDropdown = ({ className }: CommonProps) => {
                         eventKey={item.label}
                         className="mb-1 px-0"
                     >
-                        <Link 
-                            className="flex h-full w-full px-2" 
+                        <Link
+                            className="flex h-full w-full px-2"
                             to={item.path}
                         >
                             <span className="flex gap-2 items-center w-full">

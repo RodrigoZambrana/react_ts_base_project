@@ -1,4 +1,4 @@
-import profilePicture from '../../../backend_base_project/src/middlewares/MulterPictureHandler';
+import profilePicture from '../../../backend_base_project/src/middlewares/MulterPictureHandler'
 export type SignInCredential = {
     email: string
     password: string
@@ -6,13 +6,13 @@ export type SignInCredential = {
 
 export type SignInResponse = {
     token: string
-    id: number,
-    firstName: string,
-    lastName: string,
-    contactNumber:string,
-    email: string,
-    profilePicture: string,
-    userType:string[],   
+    id: number
+    firstName: string
+    lastName: string
+    contactNumber: string
+    email: string
+    profilePicture: string
+    userType: string[]
 }
 
 export type SignUpResponse = SignInResponse
@@ -27,5 +27,6 @@ export type ForgotPassword = {
 }
 
 export type ResetPassword = {
-    password: string
+    newPassword: string
+    id: number
 }

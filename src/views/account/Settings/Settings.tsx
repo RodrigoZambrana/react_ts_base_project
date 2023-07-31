@@ -76,18 +76,18 @@ const Settings = () => {
         navigate(`/app/account/settings/${val}`)
     }
 
-    const fetchData = async () => {
-        const response = await apiGetAccountSettingData<GetAccountSettingData>()
-        setData(response.data)
-    }
+    // const fetchData = async () => {
+    //     const response = await apiGetAccountSettingData<GetAccountSettingData>()
+    //     setData(response.data)
+    // }
 
-    useEffect(() => {
-        setCurrentTab(path)
-        if (isEmpty(data)) {
-            fetchData()
-        }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [])
+    // useEffect(() => {
+    //     setCurrentTab(path)
+    //     if (isEmpty(data)) {
+    //         fetchData()
+    //     }
+    //     // eslint-disable-next-line react-hooks/exhaustive-deps
+    // }, [])
 
     return (
         <Container>
@@ -106,9 +106,7 @@ const Settings = () => {
                         {currentTab === 'profile' && (
                             <Profile data={data.profile} />
                         )}
-                        {currentTab === 'password' && (
-                            <Password/>
-                        )}
+                        {currentTab === 'password' && <Password />}
                         {/* {currentTab === 'notification' && (
                             <NotificationSetting data={data.notification} />
                         )}

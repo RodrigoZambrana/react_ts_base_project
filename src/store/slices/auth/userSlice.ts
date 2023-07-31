@@ -1,9 +1,9 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { SLICE_BASE_NAME } from './constants'
-import profilePicture from '../../../../../backend_base_project/src/middlewares/MulterPictureHandler';
+import profilePicture from '../../../../../backend_base_project/src/middlewares/MulterPictureHandler'
 
 export type UserState = {
-    id: number,
+    id: number
     avatar?: string
     firstName?: string
     lastName?: string
@@ -32,7 +32,11 @@ const userSlice = createSlice({
             state.firstName = action.payload?.firstName
             state.lastName = action.payload?.lastName
             state.email = action.payload?.email
-            state.profilePicture = action.payload?.profilePicture!==""?'http://localhost:5005/profile-pictures/'+action.payload?.profilePicture:""
+            state.profilePicture =
+                action.payload?.profilePicture !== ''
+                    ? 'http://localhost:5005/profile-pictures/' +
+                      action.payload?.profilePicture
+                    : ''
             state.userType = action.payload?.userType
         },
     },
