@@ -1,6 +1,6 @@
-import { apiUpdateProfile } from '@/services/UserService'
+import { apiDeletePhoto, apiUpdateProfile } from '@/services/UserService'
 import type { updateProfile } from '@/@types/user'
-import { setUser, signInSuccess, useAppDispatch } from '@/store'
+import { setUser, signInSuccess, useAppDispatch, useAppSelector } from '@/store'
 import {
     ResetPassword,
     SignInCredential,
@@ -11,9 +11,15 @@ import axios from 'axios'
 import { PERSIST_STORE_NAME } from '@/constants/app.constant'
 import deepParseJson from '../deepParseJson'
 import { apiResetPassword } from '@/services/AuthService'
+import { deletePhoto } from '../../@types/user'
+import { UserType } from '../../../../backend_base_project/src/entity/User'
 
 function useUser() {
     const dispatch = useAppDispatch()
+    const name = useAppSelector((state) => state.auth.user.firstName)
+    const lastName = useAppSelector((state) => state.auth.user.lastName)
+    const email = useAppSelector((state) => state.auth.user.email)
+    const userType = useAppSelector((state) => state.auth.user.userType)
 
     const updateProfile = async (
         values: updateProfile
@@ -65,7 +71,6 @@ function useUser() {
             }
             const resp = await apiUpdateProfile(values)
             if (resp.data) {
-                console.log('data entro', resp.data)
                 dispatch(
                     setUser(
                         resp.data || {
@@ -79,6 +84,7 @@ function useUser() {
                     )
                 )
             }
+            window.location.reload()
             return {
                 status: 'success',
                 message: 'Perfil Actualizado',
@@ -103,6 +109,48 @@ function useUser() {
         try {
             const resp = await apiResetPassword(values)
             if (resp.data) {
+                return {
+                    status: resp.status.toString(),
+                    message: 'Contraseña actualizada',
+                }
+            }
+            // eslint-disable-next-line  @typescript-eslint/no-explicit-any
+        } catch (errors: any) {
+            return {
+                status: errors?.response.status,
+                message: errors?.response?.data?.message || errors.toString(),
+            }
+        }
+    }
+
+    const deletePhoto = async (
+        id: number
+    ): Promise<
+        | {
+              status: string
+              message: string
+          }
+        | undefined
+    > => {
+        try {
+            const userId: deletePhoto = { id }
+            const resp = await apiDeletePhoto(userId)
+            dispatch(
+                setUser({
+                    id: id,
+                    avatar: '',
+                    firstName: name,
+                    lastName: lastName,
+                    email: email,
+                    userType: userType,
+                    profilePicture: '',
+                })
+            )
+            if (resp.data) {
+                return {
+                    status: resp.status.toString(),
+                    message: 'Foto actualizada',
+                }
             }
             // eslint-disable-next-line  @typescript-eslint/no-explicit-any
         } catch (errors: any) {
@@ -116,6 +164,7 @@ function useUser() {
     return {
         updateProfile,
         resetPassword,
+        deletePhoto,
     }
 }
 

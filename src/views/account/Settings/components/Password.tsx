@@ -53,7 +53,6 @@ const Password = () => {
             newPassword,
             id,
         })
-        console.log('result', result?.status)
         if (result?.status !== '200') {
             toast.push(
                 <Notification
@@ -70,12 +69,9 @@ const Password = () => {
                 }
             )
         } else
-            toast.push(
-                <Notification title={'Perfil Actualizado'} type="success" />,
-                {
-                    placement: 'top-center',
-                }
-            )
+            toast.push(<Notification title={result.message} type="success" />, {
+                placement: 'top-center',
+            })
         setSubmitting(false)
     }
 

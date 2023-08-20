@@ -41,6 +41,7 @@ export async function apiForgotPassword(data: ForgotPassword) {
 }
 
 export async function apiResetPassword(data: ResetPassword) {
+    console.log(data.newPassword)
     return ApiService.fetchData({
         url: '/reset-password',
         method: 'post',
