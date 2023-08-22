@@ -11,7 +11,7 @@ export async function apiGetProjectList<T, U extends Record<string, unknown>>(
     data: U
 ) {
     return ApiService.fetchData<T>({
-        url: '/project/list',
+        url: '/empresas',
         method: 'post',
         data,
     })

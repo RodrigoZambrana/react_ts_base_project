@@ -15,7 +15,7 @@ const appsNavigationConfig: NavigationTree[] = [
         translateKey: 'nav.apps',
         icon: 'apps',
         type: NAV_ITEM_TYPE_TITLE,
-        authority: [ADMIN, USER],
+        authority: [ADMIN],
         subMenu: [
             {
                 key: 'apps.project',
@@ -24,28 +24,8 @@ const appsNavigationConfig: NavigationTree[] = [
                 translateKey: 'nav.appsProject.project',
                 icon: 'project',
                 type: NAV_ITEM_TYPE_COLLAPSE,
-                authority: [ADMIN, USER],
+                authority: [ADMIN],
                 subMenu: [
-                    // {
-                    //     key: 'appsProject.dashboard',
-                    //     path: `${APP_PREFIX_PATH}/project/dashboard`,
-                    //     title: 'Dashboard',
-                    //     translateKey: 'nav.appsProject.dashboard',
-                    //     icon: '',
-                    //     type: NAV_ITEM_TYPE_ITEM,
-                    //     authority: [ADMIN, USER],
-                    //     subMenu: [],
-                    // },
-                    // {
-                    //     key: 'appsProject.projectList',
-                    //     path: `${APP_PREFIX_PATH}/project/project-list`,
-                    //     title: 'Lista de Empresas',
-                    //     translateKey: 'nav.appsProject.projectList',
-                    //     icon: '',
-                    //     type: NAV_ITEM_TYPE_ITEM,
-                    //     authority: [ADMIN, USER],
-                    //     subMenu: [],
-                    // },
                     {
                         key: 'appsProject.projectList',
                         path: `${APP_PREFIX_PATH}/empresas/list`,
@@ -53,7 +33,7 @@ const appsNavigationConfig: NavigationTree[] = [
                         translateKey: 'nav.appsProject.projectList',
                         icon: '',
                         type: NAV_ITEM_TYPE_ITEM,
-                        authority: [ADMIN, USER],
+                        authority: [ADMIN],
                         subMenu: [],
                     },
                     {
@@ -63,7 +43,7 @@ const appsNavigationConfig: NavigationTree[] = [
                         translateKey: 'nav.appsCrm.customers',
                         icon: '',
                         type: NAV_ITEM_TYPE_ITEM,
-                        authority: [ADMIN, USER],
+                        authority: [ADMIN],
                         subMenu: [],
                     },
                     {
@@ -73,7 +53,7 @@ const appsNavigationConfig: NavigationTree[] = [
                         translateKey: 'nav.appsCrm.customerDetails',
                         icon: '',
                         type: NAV_ITEM_TYPE_ITEM,
-                        authority: [ADMIN, USER],
+                        authority: [ADMIN],
                         subMenu: [],
                     },
                     // {
@@ -137,7 +117,7 @@ const appsNavigationConfig: NavigationTree[] = [
             //             authority: [ADMIN, USER],
             //             subMenu: [],
             //         },
-                   
+
             //         {
             //             key: 'appsCrm.mail',
             //             path: `${APP_PREFIX_PATH}/crm/mail`,
@@ -198,7 +178,7 @@ const appsNavigationConfig: NavigationTree[] = [
                     //     type: NAV_ITEM_TYPE_ITEM,
                     //     authority: [ADMIN, USER],
                     //     subMenu: [],
-                    // },                  
+                    // },
                     // {
                     //     key: 'appsSales.orderList',
                     //     path: `${APP_PREFIX_PATH}/sales/order-list`,

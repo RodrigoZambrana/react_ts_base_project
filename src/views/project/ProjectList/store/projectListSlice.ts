@@ -4,6 +4,7 @@ import {
     apiGetScrumBoardtMembers,
     apiPutProjectList,
 } from '@/services/ProjectService'
+import { ResetPassword } from '@/@types/auth'
 
 type Member = {
     id: string
@@ -17,11 +18,6 @@ type Project = {
     name: string
     category: string
     desc: string
-    attachmentCount: number
-    totalTask: number
-    completedTask: number
-    progression: number
-    dayleft: number
     status: string
     member: Omit<Member, 'id' | 'email'>[]
 }

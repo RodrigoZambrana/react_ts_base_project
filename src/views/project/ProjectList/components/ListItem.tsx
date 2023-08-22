@@ -10,11 +10,6 @@ export type ListItemData = {
     name: string
     category: string
     desc: string
-    attachmentCount: number
-    totalTask: number
-    completedTask: number
-    progression: number
-    dayleft: number
     status: string
     member: {
         name: string
@@ -28,8 +23,7 @@ type ListItemProps = {
 }
 
 const ListItem = ({ data, cardBorder }: ListItemProps) => {
-    const { name, totalTask, completedTask, progression, member, category } =
-        data
+    const { name, member, category } = data
 
     return (
         <div className="mb-4">
@@ -38,9 +32,7 @@ const ListItem = ({ data, cardBorder }: ListItemProps) => {
                     <div className="my-1 sm:my-0 col-span-12 sm:col-span-2 md:col-span-3 lg:col-span-3 md:flex md:items-center">
                         <div className="flex flex-col">
                             <h6 className="font-bold">
-                                <Link to="/app/empresa/profile">
-                                    {name}
-                                </Link>
+                                <Link to="/app/empresa/profile">{name}</Link>
                             </h6>
                             <span>{category}</span>
                         </div>
@@ -49,12 +41,12 @@ const ListItem = ({ data, cardBorder }: ListItemProps) => {
                         <div className="inline-flex items-center px-2 py-1 border border-gray-300 rounded-full">
                             <HiOutlineClipboardCheck className="text-base" />
                             <span className="ml-1 rtl:mr-1 whitespace-nowrap">
-                                {completedTask} / {totalTask}
+                                {/* {completedTask} / {totalTask} */}
                             </span>
                         </div>
                     </div>
                     <div className="my-1 sm:my-0 col-span-12 md:col-span-2 lg:col-span-3 md:flex md:items-center">
-                        <ProgressionBar progression={progression} />
+                        {/* <ProgressionBar progression={progression} /> */}
                     </div>
                     <div className="my-1 sm:my-0 col-span-12 md:col-span-3 lg:col-span-3 md:flex md:items-center">
                         <Members members={member} />
