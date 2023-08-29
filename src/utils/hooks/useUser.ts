@@ -16,6 +16,7 @@ import { UserType } from '../../../../backend_base_project/src/entity/User'
 
 function useUser() {
     const dispatch = useAppDispatch()
+    const user_id = useAppSelector((state) => state.auth.user.id)
     const name = useAppSelector((state) => state.auth.user.firstName)
     const lastName = useAppSelector((state) => state.auth.user.lastName)
     const email = useAppSelector((state) => state.auth.user.email)
@@ -55,16 +56,15 @@ function useUser() {
                 })
                     .then((resp) => {
                         dispatch(
-                            setUser(
-                                resp.data || {
-                                    id: 0,
-                                    avatar: '',
-                                    firstName: 'Anonymous',
-                                    lastName: 'Anonymous',
-                                    email: '',
-                                    userType: ['USER'],
-                                }
-                            )
+                            setUser({
+                                id: user_id,
+                                avatar: '',
+                                firstName: name,
+                                lastName: lastName,
+                                email: email,
+                                userType: userType,
+                                profilePicture: resp.data.profilePicture,
+                            })
                         )
                     })
                     .catch((err) => console.log(err))
@@ -72,19 +72,17 @@ function useUser() {
             const resp = await apiUpdateProfile(values)
             if (resp.data) {
                 dispatch(
-                    setUser(
-                        resp.data || {
-                            id: 0,
-                            avatar: '',
-                            firstName: 'Anonymous',
-                            lastName: 'Anonymous',
-                            email: '',
-                            userType: ['USER'],
-                        }
-                    )
+                    setUser({
+                        id: user_id,
+                        avatar: '',
+                        firstName: resp.data.firstName,
+                        lastName: resp.data.lastName,
+                        email: email,
+                        userType: userType,
+                        profilePicture: resp.data.profilePicture,
+                    })
                 )
             }
-            window.location.reload()
             return {
                 status: 'success',
                 message: 'Perfil Actualizado',

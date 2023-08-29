@@ -18,91 +18,27 @@ import {
 } from '../store'
 import cloneDeep from 'lodash/cloneDeep'
 import * as Yup from 'yup'
+import Description from '../../../../../../../../Personal/react projects/Elstar - React Tailwind Admin Template/demo/src/views/ui-components/navigation/Steps/Description'
+import useTimeOutMessage from '@/utils/hooks/useTimeOutMessage'
+import { Alert, toast } from '@/components/ui'
+import Notification from '@/components/ui/Notification'
 
 type FormModel = {
-    title: string
-    content: string
-    assignees: {
-        img: string
-        name: string
-        label: string
-    }[]
-}
-
-type TaskCount = {
-    completedTask?: number
-    totalTask?: number
-}
-
-const { MultiValueLabel } = components
-
-const { useUniqueId } = hooks
-
-const CustomSelectOption = ({
-    innerProps,
-    label,
-    data,
-    isSelected,
-}: OptionProps<{ img: string }>) => {
-    return (
-        <div
-            className={`flex items-center justify-between p-2 ${
-                isSelected
-                    ? 'bg-gray-100 dark:bg-gray-500'
-                    : 'hover:bg-gray-50 dark:hover:bg-gray-600'
-            }`}
-            {...innerProps}
-        >
-            <div className="flex items-center">
-                <Avatar shape="circle" size={20} src={data.img} />
-                <span className="ml-2 rtl:mr-2">{label}</span>
-            </div>
-            {isSelected && <HiCheck className="text-emerald-500 text-xl" />}
-        </div>
-    )
-}
-
-const CustomControlMulti = ({ children, ...props }: MultiValueGenericProps) => {
-    const { img } = props.data
-
-    return (
-        <MultiValueLabel {...props}>
-            <div className="inline-flex items-center">
-                <Avatar
-                    className="mr-2 rtl:ml-2"
-                    shape="circle"
-                    size={15}
-                    src={img}
-                />
-                {children}
-            </div>
-        </MultiValueLabel>
-    )
+    name: string
+    description: string
+    rut: string
+    address: string
 }
 
 const validationSchema = Yup.object().shape({
-    title: Yup.string().min(3, 'Too Short!').required('Title required'),
-    content: Yup.string().required('Title required'),
-    assignees: Yup.array().min(1, 'Assignee required'),
-    rememberMe: Yup.bool(),
+    name: Yup.string().min(3, 'Too Short!').required('Title required'),
+    rut: Yup.string().required('Title required'),
+    address: Yup.string().required('Title required'),
 })
 
 const NewProjectForm = () => {
     const dispatch = useAppDispatch()
-
-    const members = useAppSelector((state) => state.projectList.data.allMembers)
-
-    const newId = useUniqueId('project-')
-
-    const [taskCount, setTaskCount] = useState<TaskCount>({})
-
-    useEffect(() => {
-        dispatch(getMembers())
-    }, [dispatch])
-
-    const handleAddNewTask = (count: TaskCount) => {
-        setTaskCount(count)
-    }
+    const [message, setMessage] = useState('')
 
     const onSubmit = (
         formValue: FormModel,
@@ -110,35 +46,28 @@ const NewProjectForm = () => {
     ) => {
         setSubmitting(true)
 
-        const { title, content, assignees } = formValue
-
-        const { totalTask, completedTask } = taskCount
-
-        const member = cloneDeep(assignees).map((assignee) => {
-            assignee.name = assignee.label
-            return assignee
-        })
+        const { name, description, rut, address } = formValue
 
         const values = {
-            id: newId,
-            name: title,
-            desc: content,
-            totalTask,
-            completedTask,
-            progression:
-                ((completedTask as number) / (totalTask as number)) * 100 || 0,
-            member,
+            name: name,
+            description: description,
+            rut: rut,
+            address: address,
         }
         dispatch(putProject(values))
         dispatch(toggleNewProjectDialog(false))
+        toast.push(<Notification title="Empresa agregada" type="success" />, {
+            placement: 'top-center',
+        })
     }
 
     return (
         <Formik
             initialValues={{
-                title: '',
-                content: '',
-                assignees: [],
+                name: '',
+                description: '',
+                rut: '',
+                address: '',
             }}
             validationSchema={validationSchema}
             onSubmit={(values, { setSubmitting }) => {
@@ -149,63 +78,59 @@ const NewProjectForm = () => {
                 <Form>
                     <FormContainer>
                         <FormItem
-                            label="Title"
-                            invalid={errors.title && touched.title}
-                            errorMessage={errors.title}
+                            label="Nombre"
+                            invalid={errors.name && touched.name}
+                            errorMessage={errors.name}
                         >
                             <Field
                                 type="text"
                                 autoComplete="off"
-                                name="title"
-                                placeholder="Enter title"
+                                name="name"
+                                placeholder="Ingrese nombre"
                                 component={Input}
                             />
                         </FormItem>
                         <FormItem
-                            label="Assignees"
-                            invalid={
-                                (errors.assignees && touched.assignees) as ''
-                            }
-                            errorMessage={errors.assignees as string}
+                            label="RUT"
+                            invalid={errors.rut && touched.rut}
+                            errorMessage={errors.rut}
                         >
-                            <Field name="assignees">
-                                {({ field, form }: FieldProps) => (
-                                    <Select
-                                        isMulti
-                                        className="min-w-[120px]"
-                                        components={{
-                                            Option: CustomSelectOption,
-                                            MultiValueLabel: CustomControlMulti,
-                                        }}
-                                        field={field}
-                                        form={form}
-                                        options={members}
-                                        value={values.assignees}
-                                        onChange={(option) => {
-                                            form.setFieldValue(
-                                                field.name,
-                                                option
-                                            )
-                                        }}
-                                    />
-                                )}
-                            </Field>
+                            <Field
+                                type="text"
+                                autoComplete="off"
+                                name="rut"
+                                placeholder="RUT"
+                                component={Input}
+                            />
                         </FormItem>
                         <FormItem
-                            label="Content"
-                            invalid={errors.content && touched.content}
-                            errorMessage={errors.content}
+                            label="Dirección"
+                            invalid={errors.address && touched.address}
+                            errorMessage={errors.address}
+                        >
+                            <Field
+                                type="text"
+                                autoComplete="off"
+                                name="address"
+                                placeholder="Dirección"
+                                component={Input}
+                            />
+                        </FormItem>
+                        <FormItem
+                            label="Información adicional"
+                            invalid={errors.description && touched.description}
+                            errorMessage={errors.description}
                         >
                             <Field
                                 textArea
                                 type="text"
                                 autoComplete="off"
-                                name="content"
-                                placeholder="Enter content"
+                                name="description"
+                                placeholder="Información adicional"
                                 component={Input}
                             />
                         </FormItem>
-                        <NewTaskField onAddNewTask={handleAddNewTask} />
+                        {/* <NewTaskField onAddNewTask={handleAddNewTask} /> */}
                         <Button block variant="solid" type="submit">
                             Submit
                         </Button>

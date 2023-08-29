@@ -9,23 +9,14 @@ export type GridItemProps = {
     data: {
         id: number
         name: string
-        category: string
-        desc: string
-        attachmentCount: number
-        totalTask: number
-        completedTask: number
-        progression: number
-        dayleft: number
-        status: string
-        member: {
-            name: string
-            img: string
-        }[]
+        rut: string
+        address: string
+        description: string
     }
 }
 
 const GridItem = ({ data }: GridItemProps) => {
-    const { name, totalTask, completedTask, progression, desc, member } = data
+    const { name, description } = data
 
     return (
         <Card bodyClass="h-full">
@@ -36,8 +27,8 @@ const GridItem = ({ data }: GridItemProps) => {
                     </Link>
                     <ItemDropdown />
                 </div>
-                <p className="mt-4">{desc}</p>
-                <div className="mt-3">
+                <p className="mt-4">{description}</p>
+                {/* <div className="mt-3">
                     <ProgressionBar progression={progression} />
                     <div className="flex items-center justify-between mt-2">
                         <Members members={member} />
@@ -50,7 +41,7 @@ const GridItem = ({ data }: GridItemProps) => {
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> */}
             </div>
         </Card>
     )

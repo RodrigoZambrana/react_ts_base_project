@@ -15,15 +15,9 @@ type Member = {
 type Project = {
     id: number
     name: string
-    category: string
-    desc: string
-    attachmentCount: number
-    totalTask: number
-    completedTask: number
-    progression: number
-    dayleft: number
-    status: string
-    member: Omit<Member, 'id' | 'email'>[]
+    rut: string
+    address: string
+    description: string
 }
 
 type ProjectList = Project[]
@@ -42,13 +36,10 @@ type GetScrumBoardtMembersResponse = {
 }
 
 type PutProjectListRequest = {
-    id: string
     name: string
-    desc: string
-    totalTask?: number
-    completedTask?: number
-    progression: number
-    member?: Omit<Member, 'email' | 'id'>[]
+    description: string
+    rut: string
+    address: string
 }
 
 type PutProjectListResponse = ProjectList
@@ -97,7 +88,7 @@ export const putProject = createAsyncThunk(
     SLICE_NAME + '/putProject',
     async (data: PutProjectListRequest) => {
         const response = await apiPutProjectList<
-            PutProjectListResponse,
+            GetProjectListResponse,
             PutProjectListRequest
         >(data)
         return response.data

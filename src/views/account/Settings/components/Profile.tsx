@@ -232,7 +232,7 @@ const Profile = ({
                                     {...validatorProps}
                                 >
                                     <Field
-                                        disabled="true"
+                                        disabled={true}
                                         type="email"
                                         autoComplete="off"
                                         name="email"

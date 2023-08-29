@@ -16,10 +16,9 @@ type Member = {
 type Project = {
     id: number
     name: string
-    category: string
-    desc: string
-    status: string
-    member: Omit<Member, 'id' | 'email'>[]
+    rut: string
+    address: string
+    description: string
 }
 
 type ProjectList = Project[]
@@ -40,7 +39,7 @@ type GetScrumBoardtMembersResponse = {
 type PutProjectListRequest = {
     id: string
     name: string
-    desc: string
+    description: string
     totalTask?: number
     completedTask?: number
     progression: number

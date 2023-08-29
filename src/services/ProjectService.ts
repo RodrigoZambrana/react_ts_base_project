@@ -21,8 +21,8 @@ export async function apiPutProjectList<T, U extends Record<string, unknown>>(
     data: U
 ) {
     return ApiService.fetchData<T>({
-        url: '/project/list/add',
-        method: 'put',
+        url: '/empresa/create',
+        method: 'post',
         data,
     })
 }

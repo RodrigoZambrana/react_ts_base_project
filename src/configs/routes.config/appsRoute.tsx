@@ -12,7 +12,7 @@ const appsRoute: Routes = [
     },
     {
         key: 'appsProject.projectList',
-        path: `${APP_PREFIX_PATH}/empresas/list`,
+        path: `${APP_PREFIX_PATH}/empresas/lista`,
         component: lazy(() => import('@/views/empresas/empresas-list')),
         authority: [ADMIN, USER],
     },

@@ -63,7 +63,7 @@ const ActionBar = () => {
                     prefix={<HiOutlineSearch className="text-lg" />}
                     onChange={handleInputChange}
                 />
-                {/* <Tooltip title={view === 'grid' ? 'List view' : 'Grid view'}>
+                <Tooltip title={view === 'grid' ? 'List view' : 'Grid view'}>
                     <Button
                         className="hidden md:flex"
                         variant="plain"
@@ -77,7 +77,7 @@ const ActionBar = () => {
                         }
                         onClick={() => onViewToggle()}
                     />
-                </Tooltip> */}
+                </Tooltip>
                 <Tooltip title={`Sort: ${sort === 'asc' ? 'A-Z' : 'Z-A'}`}>
                     <Button
                         className="hidden md:flex"
@@ -99,7 +99,7 @@ const ActionBar = () => {
                     icon={<HiOutlinePlusCircle />}
                     onClick={onAddNewProject}
                 >
-                   Agregar Empresa
+                    Agregar Empresa
                 </Button>
             </div>
         </div>
