@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import classNames from 'classnames'
 import GridItem from '../../../project/ProjectList/components/GridItem'
 import ListItem from '../../../project/ProjectList/components/ListItem'
@@ -8,8 +8,14 @@ import {
     useAppDispatch,
     useAppSelector,
 } from '../../../project/ProjectList/store'
+import Confirmations from '@/views/knowledge-base/ManageArticles/components/Confirmations'
+import ConfirmationsEmpresa from '@/views/knowledge-base/ManageArticles/components/ConfirmationsEmpresa'
 
 const ProjectListContent = () => {
+    const [articleRename, setArticleRename] = useState(false)
+    // const [count, setCount] = useState(0);
+    // const [count, setCount] = useState(0);
+
     const dispatch = useAppDispatch()
 
     const loading = useAppSelector((state) => state.projectList.data.loading)
@@ -26,31 +32,35 @@ const ProjectListContent = () => {
     }, [dispatch, sort, search])
 
     return (
-        <div
-            className={classNames(
-                'mt-6 h-full flex flex-col',
-                loading && 'justify-center'
-            )}
-        >
-            {loading && (
-                <div className="flex justify-center">
-                    <Spinner size={40} />
-                </div>
-            )}
-            {view === 'grid' && projectList.length > 0 && !loading && (
-                <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-                    {projectList.map((project) => (
-                        <GridItem key={project.id} data={project} />
+        <>
+            <ConfirmationsEmpresa rename={articleRename} />
+
+            <div
+                className={classNames(
+                    'mt-6 h-full flex flex-col',
+                    loading && 'justify-center'
+                )}
+            >
+                {loading && (
+                    <div className="flex justify-center">
+                        <Spinner size={40} />
+                    </div>
+                )}
+                {view === 'grid' && projectList.length > 0 && !loading && (
+                    <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+                        {projectList.map((project) => (
+                            <GridItem key={project.id} data={project} />
+                        ))}
+                    </div>
+                )}
+                {view === 'list' &&
+                    projectList.length > 0 &&
+                    !loading &&
+                    projectList.map((project) => (
+                        <ListItem key={project.id} data={project} />
                     ))}
-                </div>
-            )}
-            {view === 'list' &&
-                projectList.length > 0 &&
-                !loading &&
-                projectList.map((project) => (
-                    <ListItem key={project.id} data={project} />
-                ))}
-        </div>
+            </div>
+        </>
     )
 }
 

@@ -1,26 +1,57 @@
 import Dropdown from '@/components/ui/Dropdown'
+import { useState } from 'react'
 import {
     HiOutlineSwitchHorizontal,
     HiOutlineFlag,
     HiOutlineCog,
 } from 'react-icons/hi'
-import EllipsisButton from '@/components/shared/EllipsisButton'
-
-const dropdownList = [
-    { label: 'Add Flag', value: 'addFlag', icon: <HiOutlineFlag /> },
-    { label: 'Move', value: 'move', icon: <HiOutlineSwitchHorizontal /> },
-    { label: 'Setting', value: 'projectSetting', icon: <HiOutlineCog /> },
-]
+import { useNavigate } from 'react-router-dom'
+import {
+    getCategorizedArticles,
+    toggleArticleDeleteConfirmation,
+    toggleCategoryDeleteConfirmation,
+    toggleCategoryRenameDialog,
+    setSelected,
+    useAppDispatch,
+    useAppSelector,
+    CategorizedArticles,
+} from '../../../knowledge-base/ManageArticles/store'
+import { toggleNewProjectDialog } from '../store'
 
 const ItemDropdown = () => {
+    const dispatch = useAppDispatch()
+
+    const [collapse, setCollapse] = useState(false)
+
+    const navigate = useNavigate()
+
+    const onArticleEdit = (id: string) => {
+        navigate(`/app/knowledge-base/edit-article?id=${id}&categoryLabel=`)
+    }
+
+    const onArticleAdd = () => {
+        dispatch(toggleNewProjectDialog(true))
+    }
+
+    const onCategoryRename = () => {
+        dispatch(toggleCategoryRenameDialog(true))
+    }
+
+    const onCategoryDelete = () => {
+        dispatch(setSelected({ id: '', categoryValue: 1 }))
+        dispatch(toggleCategoryDeleteConfirmation(true))
+    }
     return (
-        <Dropdown placement="bottom-end" renderTitle={<EllipsisButton />}>
-            {dropdownList.map((item) => (
-                <Dropdown.Item key={item.value} eventKey={item.value}>
-                    <span className="text-lg">{item.icon}</span>
-                    <span className="ml-2 rtl:mr-2">{item.label}</span>
-                </Dropdown.Item>
-            ))}
+        <Dropdown>
+            <Dropdown.Item eventKey="addArticle" onClick={() => onArticleAdd()}>
+                Add article
+            </Dropdown.Item>
+            <Dropdown.Item eventKey="rename" onClick={onCategoryRename}>
+                Rename
+            </Dropdown.Item>
+            <Dropdown.Item eventKey="delete" onClick={onCategoryDelete}>
+                Delete
+            </Dropdown.Item>
         </Dropdown>
     )
 }

@@ -55,6 +55,7 @@ export type ProjectListState = {
     view: 'grid' | 'list'
     query: Query
     newProjectDialog: boolean
+    newEmpleadoDialog: boolean
 }
 
 export const SLICE_NAME = 'projectList'
@@ -105,6 +106,7 @@ const initialState: ProjectListState = {
         search: '',
     },
     newProjectDialog: false,
+    newEmpleadoDialog: false,
 }
 
 const projectListSlice = createSlice({
