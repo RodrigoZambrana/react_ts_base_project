@@ -125,6 +125,9 @@ const projectListSlice = createSlice({
         toggleNewProjectDialog: (state, action) => {
             state.newProjectDialog = action.payload
         },
+        toggleNewEmpleadoDialog: (state, action) => {
+            state.newEmpleadoDialog = action.payload
+        },
     },
     extraReducers: (builder) => {
         builder
@@ -144,7 +147,12 @@ const projectListSlice = createSlice({
     },
 })
 
-export const { toggleView, toggleSort, toggleNewProjectDialog, setSearch } =
-    projectListSlice.actions
+export const {
+    toggleView,
+    toggleSort,
+    toggleNewProjectDialog,
+    toggleNewEmpleadoDialog,
+    setSearch,
+} = projectListSlice.actions
 
 export default projectListSlice.reducer

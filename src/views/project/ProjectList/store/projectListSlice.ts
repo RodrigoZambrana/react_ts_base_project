@@ -59,6 +59,7 @@ export type ProjectListState = {
     view: 'grid' | 'list'
     query: Query
     newProjectDialog: boolean
+    addEmployeeDialog: boolean
 }
 
 export const SLICE_NAME = 'projectList'
@@ -109,6 +110,7 @@ const initialState: ProjectListState = {
         search: '',
     },
     newProjectDialog: false,
+    addEmployeeDialog: false,
 }
 
 const projectListSlice = createSlice({
@@ -126,6 +128,9 @@ const projectListSlice = createSlice({
         },
         toggleNewProjectDialog: (state, action) => {
             state.newProjectDialog = action.payload
+        },
+        toggleAddEmployeeDialog: (state, action) => {
+            state.addEmployeeDialog = action.payload
         },
     },
     extraReducers: (builder) => {
@@ -146,7 +151,12 @@ const projectListSlice = createSlice({
     },
 })
 
-export const { toggleView, toggleSort, toggleNewProjectDialog, setSearch } =
-    projectListSlice.actions
+export const {
+    toggleView,
+    toggleSort,
+    toggleNewProjectDialog,
+    toggleAddEmployeeDialog,
+    setSearch,
+} = projectListSlice.actions
 
 export default projectListSlice.reducer

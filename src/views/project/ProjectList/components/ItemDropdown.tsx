@@ -7,16 +7,10 @@ import {
 } from 'react-icons/hi'
 import { useNavigate } from 'react-router-dom'
 import {
-    getCategorizedArticles,
-    toggleArticleDeleteConfirmation,
-    toggleCategoryDeleteConfirmation,
-    toggleCategoryRenameDialog,
-    setSelected,
+    toggleNewEmpleadoDialog,
     useAppDispatch,
     useAppSelector,
-    CategorizedArticles,
-} from '../../../knowledge-base/ManageArticles/store'
-import { toggleNewProjectDialog } from '../store'
+} from '../../../empresas/empresas-list/store'
 
 const ItemDropdown = () => {
     const dispatch = useAppDispatch()
@@ -30,27 +24,22 @@ const ItemDropdown = () => {
     }
 
     const onArticleAdd = () => {
-        dispatch(toggleNewProjectDialog(true))
+        dispatch(toggleNewEmpleadoDialog(true))
     }
 
-    const onCategoryRename = () => {
-        dispatch(toggleCategoryRenameDialog(true))
-    }
+    const onCategoryRename = () => {}
 
-    const onCategoryDelete = () => {
-        dispatch(setSelected({ id: '', categoryValue: 1 }))
-        dispatch(toggleCategoryDeleteConfirmation(true))
-    }
+    const onCategoryDelete = () => {}
     return (
         <Dropdown>
             <Dropdown.Item eventKey="addArticle" onClick={() => onArticleAdd()}>
-                Add article
+                Agregar empleados
             </Dropdown.Item>
             <Dropdown.Item eventKey="rename" onClick={onCategoryRename}>
-                Rename
+                Editar empresa
             </Dropdown.Item>
             <Dropdown.Item eventKey="delete" onClick={onCategoryDelete}>
-                Delete
+                Eliminar empresa
             </Dropdown.Item>
         </Dropdown>
     )

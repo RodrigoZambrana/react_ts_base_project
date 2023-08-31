@@ -4,6 +4,8 @@ import NewProjectDialog from './components/NewProjectDialog'
 import Container from '@/components/shared/Container'
 import reducer from './store'
 import { injectReducer } from '@/store'
+import AddEmpleadoDialog from '@/views/project/ProjectList/components/AddEmployeeDialog'
+import AddEmployeeDialog from '@/views/project/ProjectList/components/AddEmployeeDialog'
 
 injectReducer('projectList', reducer)
 
@@ -13,6 +15,7 @@ const EmpresasList = () => {
             <ActionBar />
             <EmpresasListContent />
             <NewProjectDialog />
+            <AddEmployeeDialog />
         </Container>
     )
 }
