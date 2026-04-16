@@ -86,7 +86,7 @@ const SideNav = () => {
                         !sideNavCollapse && 'side-nav-expand'
                     )}
                 >
-                    <div className="side-nav-header">
+                    {/* <div className="side-nav-header">
                         <Logo
                             mode={logoMode()}
                             type={sideNavCollapse ? 'streamline' : 'full'}
@@ -96,7 +96,7 @@ const SideNav = () => {
                                     : LOGO_X_GUTTER
                             }
                         />
-                    </div>
+                    </div> */}
                     {sideNavCollapse ? (
                         menuContent
                     ) : (
